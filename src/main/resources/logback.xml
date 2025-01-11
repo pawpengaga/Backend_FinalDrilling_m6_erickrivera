@@ -15,6 +15,14 @@
   </logger>
 
   <!-- Poner loggers para los distintos paquetes aqui -->
+
+  <logger name="com.pawpengaga.backend.service.AlumnoService" level="DEBUG">
+    <appender-ref ref="FILE" />
+  </logger>
+
+  <logger name="com.pawpengaga.backend.service.MateriaService" level="DEBUG">
+    <appender-ref ref="FILE" />
+  </logger>
   
   <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
