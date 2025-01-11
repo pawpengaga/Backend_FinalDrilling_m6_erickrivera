@@ -23,6 +23,10 @@
   <logger name="com.pawpengaga.backend.service.MateriaService" level="DEBUG">
     <appender-ref ref="FILE" />
   </logger>
+
+  <logger name="com.pawpengaga.backend.controller.AlumnoController" level="DEBUG">
+    <appender-ref ref="FILE" />
+  </logger>
   
   <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
