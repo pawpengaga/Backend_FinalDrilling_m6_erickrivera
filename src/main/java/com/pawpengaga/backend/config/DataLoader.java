@@ -1,5 +1,6 @@
 package com.pawpengaga.backend.config;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -35,18 +36,20 @@ public class DataLoader implements CommandLineRunner {
     
     System.out.println("DEBUGGER PLAYGROUND");
     
-    List<Object[]> alumnosRecuperados = alumnoRepo.findAlumnosWithMaterias();
-    List<Alumno> alumnos = alumnosRecuperados.stream()
-      .map(row -> new Alumno(
-        ((Number) row[0]).longValue(),
-        (String) row[1],
-        (String) row[2],
-        (String) row[3],
-        Arrays.stream((String[]) row[4])
-          .map(nombreMateria -> new Materia(null, nombreMateria, new HashSet<>()))
-          .collect(Collectors.toSet())
-      ))
-      .toList();
+      List<Alumno> alumnos = new ArrayList<>();
+
+      List<Object[]> alumnosRecuperados = alumnoRepo.findAlumnosWithMaterias();
+      alumnos = alumnosRecuperados.stream()
+        .map(row -> new Alumno(
+          ((Number) row[0]).longValue(),
+          (String) row[1],
+          (String) row[2],
+          (String) row[3],
+          Arrays.stream((String[]) row[4])
+            .map(nombreMateria -> new Materia(materiaRepo.findByNombre(nombreMateria).getId(), nombreMateria, new HashSet<>()))
+            .collect(Collectors.toSet())
+        ))
+        .toList();
     
     for (Object alumno : alumnos) {
       System.out.println(alumno);

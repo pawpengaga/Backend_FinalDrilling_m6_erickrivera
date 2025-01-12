@@ -55,7 +55,7 @@ public class AlumnoController {
       }
 
       myLogger.info("Alumno guardado!: {}", alumno);
-      return ResponseEntity.ok("Alumno guardado. Revise los logs para más información");
+      return ResponseEntity.ok("Alumno guardado!:\n" + alumnoGuardar);
       
     } catch (Exception e) {
       myLogger.error("Ocurrió un error a nivel de controlador REST al guardar al alumno", e);

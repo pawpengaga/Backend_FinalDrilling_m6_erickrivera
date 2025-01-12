@@ -40,4 +40,14 @@ public class Materia {
   @ManyToMany(mappedBy = "materiaList")
   @JsonIgnore
   private Set<Alumno> alumno = new HashSet<>();
+
+
+  @Override
+  public String toString() {
+      return "{\n" +
+             "\t\"id\": \"" + getId() + "\",\n" +
+             "\t\"nombre\": \"" + getNombre() + "\",\n" +
+             "}";
+  }
+
 }

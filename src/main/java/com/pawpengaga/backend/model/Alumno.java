@@ -56,5 +56,17 @@ public class Alumno {
   )
   @Column(nullable = false)
   private Set<Materia> materiaList = new HashSet<>();
+
+  @Override
+  public String toString() {
+      return "{\n" +
+             "  \"id\": \"" + getId() + "\",\n" +
+             "  \"rut\": \"" + getRut() + "\",\n" +
+             "  \"nombre\": \"" + getNombre() + "\",\n" +
+             "  \"direccion\": \"" + getDireccion() + "\",\n" +
+             "  \"Materias\": " + getMateriaList() + "\n" +
+             "}";
+  }
+
   
 }

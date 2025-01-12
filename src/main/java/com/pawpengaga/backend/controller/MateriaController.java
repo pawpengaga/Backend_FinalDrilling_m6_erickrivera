@@ -29,9 +29,9 @@ public class MateriaController {
   @PostMapping("/grabar")
   public ResponseEntity<String> grabarMaterias(@RequestBody Materia materia){
     try {
-      materiaService.guardarMateria(materia);
+      Materia materiaMostrar = materiaService.guardarMateria(materia);
       myLogger.info("Materia guardada!: {}", materia);
-      return ResponseEntity.ok("Materia guardada. Revise los logs para más información");
+      return ResponseEntity.ok("Materia guardada:\n" + materiaMostrar);
     } catch (Exception e) {
       myLogger.error("Ocurrió un error a nivel de controlador REST al guardar la materia", e);
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
