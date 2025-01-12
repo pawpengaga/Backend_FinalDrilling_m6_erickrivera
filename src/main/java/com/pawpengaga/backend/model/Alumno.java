@@ -3,13 +3,21 @@ package com.pawpengaga.backend.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,7 +43,18 @@ public class Alumno {
   @Column(length = 100, nullable = false)
   private String direccion;
   
-  @OneToMany(mappedBy = "alumno", cascade = CascadeType.ALL)
+  // @JoinTable(name = "alumno_materia", joinColumns = @JoinColumn(name="alumno_id"), inverseJoinColumns = @JoinColumn(name = "materia_id"))
+  @ManyToMany(fetch = FetchType.LAZY)
+  @JoinTable(
+    name = "alumno_materia",
+    joinColumns = {
+      @JoinColumn(name = "alumno_id", referencedColumnName = "id")
+    },
+    inverseJoinColumns = {
+      @JoinColumn(name = "materia_id", referencedColumnName = "id")
+    }
+  )
+  @Column(nullable = false)
   private Set<Materia> materiaList = new HashSet<>();
   
 }
