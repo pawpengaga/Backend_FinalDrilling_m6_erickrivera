@@ -14,9 +14,43 @@ Ejecutar el proyecto de manera normal
 
 ## Etapas del proyecto
 
-- Crear los endopoints de la API
+- Crear los endopoints de la API `<- LISTO`
 - Protegerlos con security
 - Aplicar JWT
+
+## Documentación de la api 🧭
+
+Listar alumnos `GET`
+
+```
+localhost:3000/api/v1/alumnos
+```
+
+Crear alumnos `POST`
+
+```
+localhost:3000/api/v1/alumnos/grabar
+```
+
+Crear materias `POST`
+
+```
+localhost:3000/api/v1/materias/grabar
+```
+
+## Seed 🌱
+
+Al iniciar el proyecto por primera vez, `DataLoader` cargará las siguientes materias *si no detecta ninguna*:
+
+- Matemáticas
+- Historia
+- Ciencias
+- Educacion Civica
+- Educacion Fisica
+- Quimica
+- Ingles
+
+Adicionalmente listará todos los alumnos si llegaran a existir
 
 ## Ideas para el proyecto
 
