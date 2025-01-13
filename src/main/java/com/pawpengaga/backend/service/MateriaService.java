@@ -1,5 +1,6 @@
 package com.pawpengaga.backend.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -34,6 +35,21 @@ public class MateriaService {
       myLogger.error("Hubo un error al guardar la materia... {}", e);
       return null;
     }
+  }
+
+  public List<Materia> listarMaterias(){
+   
+    try {
+      
+      List<Materia> materias = materiaRepo.findAll();
+      myLogger.info("Retornando materias... {}", materias);
+      return materias;
+      
+    } catch (Exception e) {
+      myLogger.error("Ha ocurrido un error a la hora de retornar las materias... {}", e.getMessage());
+      return new ArrayList<>();
+    }
+    
   }
 
 }

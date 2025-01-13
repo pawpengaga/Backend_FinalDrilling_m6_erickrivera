@@ -12,7 +12,7 @@ CREATE DATABASE db_final_drilling_m6;
 Ejecutar el proyecto de manera normal
 
 
-## Etapas del proyecto
+## Etapas del proyecto 🀄
 
 - Crear los endopoints de la API `<- LISTO`
 - Protegerlos con security
@@ -50,10 +50,6 @@ Al iniciar el proyecto por primera vez, `DataLoader` cargará las siguientes mat
 - Quimica
 - Ingles
 
-Adicionalmente listará todos los alumnos si llegaran a existir
+> Adicionalmente listará todos los alumnos si llegaran a existir
 
-## Ideas para el proyecto
-
-- Crear validación personalizada para el RUT
-
-Enlace al frontend 🌼
+🌼 Enlace al frontend 🌼

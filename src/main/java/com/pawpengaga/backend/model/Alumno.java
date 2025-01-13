@@ -64,7 +64,7 @@ public class Alumno {
              "  \"rut\": \"" + getRut() + "\",\n" +
              "  \"nombre\": \"" + getNombre() + "\",\n" +
              "  \"direccion\": \"" + getDireccion() + "\",\n" +
-             "  \"Materias\": " + getMateriaList() + "\n" +
+             "  \"materias\": " + getMateriaList() + "\n" +
              "}";
   }
 
