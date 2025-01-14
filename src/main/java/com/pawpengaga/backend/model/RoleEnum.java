@@ -1,13 +1,13 @@
 package com.pawpengaga.backend.model;
 
-import org.springframework.security.core.GrantedAuthority;
+// import org.springframework.security.core.GrantedAuthority;
 
-public enum RoleEnum implements GrantedAuthority {
+public enum RoleEnum {
 
-  ROLE_ADMIN, ROLE_CLIENT;
+  ADMIN, CLIENT;
 
-  public String getAuthority(){
-    return name();
-  }
+  // public String getAuthority(){
+  //   return name();
+  // }
 
 }

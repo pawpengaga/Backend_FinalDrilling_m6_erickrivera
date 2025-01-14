@@ -20,6 +20,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
+import com.pawpengaga.backend.model.RoleEnum;
+import com.pawpengaga.backend.service.UserDetailsServiceImpl;
+
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -37,18 +40,25 @@ public class SecurityConfig {
       .csrf(csrf -> csrf.disable())
       .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
       .authorizeHttpRequests(http -> {
-        http.requestMatchers(HttpMethod.GET, "/api/v1/**","/auth/**").permitAll();
-        http.requestMatchers(HttpMethod.POST, "/api/v1/**","/auth/**").permitAll();
+
         
-        // http.anyRequest().authenticated();
+        http.requestMatchers(HttpMethod.GET, "/api/v1/auth/**").permitAll();
+        http.requestMatchers(HttpMethod.POST, "/api/v1/auth/**").permitAll();
+        
+        // http.requestMatchers(HttpMethod.GET, "/api/v1/alumnos/**", "/api/v1/materias/**").permitAll();
+        
+        http.requestMatchers(HttpMethod.GET, "/api/v1/alumnos/**", "/api/v1/materias/**").hasAuthority("READ");
+        http.requestMatchers(HttpMethod.POST, "/api/v1/alumnos/**", "/auth/**", "/api/v1/materias/**").hasAuthority("CREATE");
+        
+        http.anyRequest().authenticated();
       
       })
-      .formLogin(formlogin -> formlogin
-        .usernameParameter("correo")
-        .passwordParameter("clave")
-        .loginPage("/auth/login")
-        .loginProcessingUrl("/auth/login")
-      )
+      // .formLogin(formlogin -> formlogin
+      //   .usernameParameter("correo")
+      //   .passwordParameter("clave")
+      //   .loginPage("/auth/login")
+      //   .loginProcessingUrl("/auth/login")
+      // )
 
       .formLogin(Customizer.withDefaults())
       .httpBasic(Customizer.withDefaults());
@@ -65,21 +75,19 @@ public class SecurityConfig {
     return authenticationConfiguration.getAuthenticationManager();
   }
 
-  
-  /*
-
+  /* HABILITADO POR FIN */  
   @Bean
   AuthenticationProvider authenticationProvider(UserDetailsServiceImpl userDetailService){
-
+    
     DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
     authenticationProvider.setPasswordEncoder(passwordEncoder());
     authenticationProvider.setUserDetailsService(userDetailService);
     return authenticationProvider;
-
+    
   }
+  /* HABILITADO POR FIN */  
   
-  */
-
+  
   @Bean
   PasswordEncoder passwordEncoder(){
     return new BCryptPasswordEncoder();
