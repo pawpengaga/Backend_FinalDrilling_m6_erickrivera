@@ -28,8 +28,10 @@ public class SecurityConfig {
   @Bean
   SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
+    // @Autowired
+    // JWUtils jwtUtils;
+
     /* ************************************************************************************ */
-    // Ahora vamos a aplicar seguridad
 
     httpSecurity
       .csrf(csrf -> csrf.disable())
@@ -37,6 +39,9 @@ public class SecurityConfig {
       .authorizeHttpRequests(http -> {
         http.requestMatchers(HttpMethod.GET, "/**","/auth/**").permitAll();
         http.requestMatchers(HttpMethod.POST, "/**","/auth/**").permitAll();
+        
+        // http.anyRequest().authenticated();
+      
       })
       .formLogin(formlogin -> formlogin
         .usernameParameter("correo")
@@ -45,9 +50,9 @@ public class SecurityConfig {
         .loginProcessingUrl("/auth/login")
       )
 
-      .exceptionHandling((exceptionHandling) -> exceptionHandling.accessDeniedPage("/401"))
-
+      .formLogin(Customizer.withDefaults())
       .httpBasic(Customizer.withDefaults());
+      // .addFilterBefore(new JwtTokenValidator(jwtUtils), BasicAuthenticationFilter.class);
 
     /* ************************************************************************************ */
 
@@ -55,43 +60,31 @@ public class SecurityConfig {
 
   }
 
-  // Este metodo corresponde al paso 3 de la infografía
   @Bean
   AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
     return authenticationConfiguration.getAuthenticationManager();
   }
 
-  // Nuestro proveedor, aún vacío, el paso 4 de la infografía
-  // Nuestro proveveedor de autenticacion de interno, va separado de lo que sería un oauth
-  // @Bean
-  // AuthenticationProvider authenticationProvider(UserDetailsServiceImpl userDetailService){
+  
+  /*
 
-  //   DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-  //   authenticationProvider.setPasswordEncoder(passwordEncoder());
-  //   authenticationProvider.setUserDetailsService(userDetailService);
-  //   return authenticationProvider;
-
-  // }
-
-  // El paso 5A de la infografía
-  // @SuppressWarnings("deprecation")
   @Bean
-  PasswordEncoder passwordEncoder(){
-    
-    // return NoOpPasswordEncoder.getInstance(); // Un metodo obsoleto con fines de prueba
-    return new BCryptPasswordEncoder();
+  AuthenticationProvider authenticationProvider(UserDetailsServiceImpl userDetailService){
+
+    DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+    authenticationProvider.setPasswordEncoder(passwordEncoder());
+    authenticationProvider.setUserDetailsService(userDetailService);
+    return authenticationProvider;
+
   }
   
-  // El paso 5B de la infografía
-  // Trabamos al parecer con un usuario en memoria
-  // @Bean
-  // UserDetailsService userDetailsService(){
-  //   UserDetails upUserDetails = User.withUsername("Admin")
-  //                                   .password("12345678")
-  //                                   .roles("ADMIN")
-  //                                   .authorities("READ", "CREATE")
-  //                                   .build();
-  //   return new InMemoryUserDetailsManager(upUserDetails);
-  // }
+  */
+
+  @Bean
+  PasswordEncoder passwordEncoder(){
+    return new BCryptPasswordEncoder();
+  }
+
+  // No usaremos usuario en memoria ni siquiera con fines de prueba
 
 }
