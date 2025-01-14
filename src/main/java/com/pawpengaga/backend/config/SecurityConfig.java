@@ -37,8 +37,8 @@ public class SecurityConfig {
       .csrf(csrf -> csrf.disable())
       .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
       .authorizeHttpRequests(http -> {
-        http.requestMatchers(HttpMethod.GET, "/**","/auth/**").permitAll();
-        http.requestMatchers(HttpMethod.POST, "/**","/auth/**").permitAll();
+        http.requestMatchers(HttpMethod.GET, "/api/v1/**","/auth/**").permitAll();
+        http.requestMatchers(HttpMethod.POST, "/api/v1/**","/auth/**").permitAll();
         
         // http.anyRequest().authenticated();
       
