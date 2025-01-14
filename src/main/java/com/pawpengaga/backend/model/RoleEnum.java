@@ -4,7 +4,7 @@ package com.pawpengaga.backend.model;
 
 public enum RoleEnum {
 
-  ADMIN, CLIENT;
+  ADMIN, CLIENT, GUEST;
 
   // public String getAuthority(){
   //   return name();

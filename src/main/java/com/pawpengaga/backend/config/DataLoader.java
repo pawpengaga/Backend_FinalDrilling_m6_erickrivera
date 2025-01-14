@@ -112,14 +112,19 @@ public class DataLoader implements CommandLineRunner {
   
         Role client = Role.builder()
                      .role(RoleEnum.CLIENT)
-                     .permisos(Set.of(leer, crear))
+                     .permisos(Set.of(leer, crear, actualizar))
+                     .build();
+
+        Role guest = Role.builder()
+                     .role(RoleEnum.GUEST)
+                     .permisos(Set.of(leer))
                      .build();
   
         Usuario admistrador = Usuario.builder()
           .nombre("Ana Banana")
           .correo("anabanana@mail.com")
           .clave(claveEncriptada)
-          .roles(Set.of(admin, client))
+          .roles(Set.of(admin, client, guest))
           .isEnabled(true)
           .accountNoExpired(true)
           .accountNoLocked(true)
@@ -130,14 +135,25 @@ public class DataLoader implements CommandLineRunner {
           .nombre("Maria Sandia")
           .correo("mariasandia@mail.com")
           .clave(claveEncriptada)
-          .roles(Set.of(client))
+          .roles(Set.of(client, guest))
+          .isEnabled(true)
+          .accountNoExpired(true)
+          .accountNoLocked(true)
+          .credentialNoExpired(true)
+          .build();
+
+        Usuario invitado = Usuario.builder()
+          .nombre("Invitado")
+          .correo("invitado@mail.com")
+          .clave(claveEncriptada)
+          .roles(Set.of(guest))
           .isEnabled(true)
           .accountNoExpired(true)
           .accountNoLocked(true)
           .credentialNoExpired(true)
           .build();
   
-        userRepo.saveAll(List.of(admistrador, cliente));
+        userRepo.saveAll(List.of(admistrador, cliente, invitado));
         
         System.out.println("###########################################################################");
   
