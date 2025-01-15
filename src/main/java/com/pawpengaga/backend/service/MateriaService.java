@@ -38,7 +38,7 @@ public class MateriaService {
   }
 
   public List<Materia> listarMaterias(){
-   
+    
     try {
       
       List<Materia> materias = materiaRepo.findAll();

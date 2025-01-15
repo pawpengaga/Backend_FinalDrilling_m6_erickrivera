@@ -46,6 +46,7 @@ public class SecurityConfig {
         http.requestMatchers(HttpMethod.POST, "/api/v1/auth/**").permitAll();
         
         // http.requestMatchers(HttpMethod.GET, "/api/v1/alumnos/**", "/api/v1/materias/**").permitAll();
+        // http.requestMatchers(HttpMethod.POST, "/api/v1/alumnos/**", "/api/v1/materias/**").permitAll();
         
         http.requestMatchers(HttpMethod.GET, "/api/v1/alumnos/**", "/api/v1/materias/**").hasAuthority("READ");
         http.requestMatchers(HttpMethod.POST, "/api/v1/alumnos/**", "/auth/**", "/api/v1/materias/**").hasAuthority("CREATE");
@@ -53,12 +54,12 @@ public class SecurityConfig {
         http.anyRequest().authenticated();
       
       })
-      // .formLogin(formlogin -> formlogin
-      //   .usernameParameter("correo")
-      //   .passwordParameter("clave")
-      //   .loginPage("/auth/login")
-      //   .loginProcessingUrl("/auth/login")
-      // )
+      .formLogin(formlogin -> formlogin
+        .usernameParameter("correo")
+        .passwordParameter("clave")
+        .loginProcessingUrl("/api/v1/auth/login")
+        // .loginPage("/auth/login")
+      )
 
       .formLogin(Customizer.withDefaults())
       .httpBasic(Customizer.withDefaults());
