@@ -20,19 +20,22 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
+import com.pawpengaga.backend.filter.JwtTokenValidator;
 import com.pawpengaga.backend.model.RoleEnum;
 import com.pawpengaga.backend.service.UserDetailsServiceImpl;
+import com.pawpengaga.backend.utils.JWUtils;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
 
+  @Autowired
+  JWUtils jwtUtils;
+
   @Bean
   SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
-    // @Autowired
-    // JWUtils jwtUtils;
 
     /* ************************************************************************************ */
 
@@ -61,9 +64,9 @@ public class SecurityConfig {
         // .loginPage("/auth/login")
       )
 
-      .formLogin(Customizer.withDefaults())
-      .httpBasic(Customizer.withDefaults());
-      // .addFilterBefore(new JwtTokenValidator(jwtUtils), BasicAuthenticationFilter.class);
+      .httpBasic(Customizer.withDefaults())
+      .addFilterBefore(new JwtTokenValidator(jwtUtils), BasicAuthenticationFilter.class);
+      // .formLogin(Customizer.withDefaults())
 
     /* ************************************************************************************ */
 
