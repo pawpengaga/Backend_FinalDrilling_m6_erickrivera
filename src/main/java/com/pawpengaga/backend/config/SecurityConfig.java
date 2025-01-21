@@ -44,15 +44,18 @@ public class SecurityConfig {
       .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
       .authorizeHttpRequests(http -> {
 
-        
         http.requestMatchers(HttpMethod.GET, "/api/v1/auth/**").permitAll();
         http.requestMatchers(HttpMethod.POST, "/api/v1/auth/**").permitAll();
         
         // http.requestMatchers(HttpMethod.GET, "/api/v1/alumnos/**", "/api/v1/materias/**").permitAll();
         // http.requestMatchers(HttpMethod.POST, "/api/v1/alumnos/**", "/api/v1/materias/**").permitAll();
         
-        http.requestMatchers(HttpMethod.GET, "/api/v1/alumnos/**", "/api/v1/materias/**").hasAuthority("READ");
-        http.requestMatchers(HttpMethod.POST, "/api/v1/alumnos/**", "/auth/**", "/api/v1/materias/**").hasAuthority("CREATE");
+
+        // Cada metodo HTTP tiene su NIVEL MINIMO de acceso, por como funciona la lista de Authorities
+        http.requestMatchers(HttpMethod.GET, "/api/v1/alumnos/**", "/api/v1/materias/**").hasAuthority("ROLE_GUEST");
+        http.requestMatchers(HttpMethod.POST, "/api/v1/alumnos/**", "/auth/**", "/api/v1/materias/**").hasAuthority("ROLE_CLIENT");
+        http.requestMatchers(HttpMethod.PUT, "/api/v1/alumnos/**", "/auth/**", "/api/v1/materias/**").hasAuthority("ROLE_ADMIN");
+        http.requestMatchers(HttpMethod.DELETE, "/api/v1/alumnos/**", "/auth/**", "/api/v1/materias/**").hasAuthority("ROLE_ADMIN");
         
         http.anyRequest().authenticated();
       

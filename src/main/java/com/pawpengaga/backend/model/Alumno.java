@@ -43,7 +43,6 @@ public class Alumno {
   @Column(length = 100, nullable = false)
   private String direccion;
   
-  // @JoinTable(name = "alumno_materia", joinColumns = @JoinColumn(name="alumno_id"), inverseJoinColumns = @JoinColumn(name = "materia_id"))
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
     name = "alumno_materia",

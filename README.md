@@ -2,6 +2,20 @@
 
 Una API REST protegida por Spring Security y JWT
 
+## Puertos
+
+### Backend 🌸
+
+```
+localhost:3000
+```
+
+### Frontend 🌼
+
+```
+localhost:3001
+```
+
 ## Instrucciones para ejecución
 
 Crear base de datos
@@ -15,28 +29,91 @@ Ejecutar el proyecto de manera normal
 ## Etapas del proyecto 🀄
 
 - Crear los endopoints de la API `<- LISTO`
-- Protegerlos con security
-- Aplicar JWT
+- Protegerlos con security `<- LISTO`
+- Aplicar JWT `<- LISTO`
 
 ## Documentación de la api 🧭
 
-Listar alumnos `GET`
+### Listar alumnos `GET`
+
+Requiere token en los headers para funcionar
 
 ```
 localhost:3000/api/v1/alumnos
 ```
 
-Crear alumnos `POST`
+### Crear alumnos `POST`
+
+Requiere token en los headers para funcionar
 
 ```
 localhost:3000/api/v1/alumnos/grabar
 ```
 
-Crear materias `POST`
+Ejemplo de solicitud
+
+```json
+{
+  "rut": "19.492.730-4",
+  "nombre": "Erick Rivera",
+  "direccion": "Arica, Chile",
+  "materiaList": [
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    }
+  ]
+}
+```
+
+### Obtener materias `GET`
+
+Requiere token en los headers para funcionar
+
+
+```
+localhost:3000/api/v1/materias
+```
+### Crear materias `POST`
+
+Requiere token en los headers para funcionar
+
 
 ```
 localhost:3000/api/v1/materias/grabar
 ```
+
+Ejemplo de solicitud
+
+```json
+{
+  "nombre": "Materia de ana banana"
+}
+```
+
+### Iniciar sesión `POST`
+
+No requiere token
+
+
+```
+localhost:3000/api/v1/auth/log-in
+```
+
+Ejemplo de solicitud
+
+```json
+{
+  "username": "anabanana@mail.com",
+  "password": "12345678"
+}
+```
+
 
 ## Seed 🌱
 
@@ -51,5 +128,24 @@ Al iniciar el proyecto por primera vez, `DataLoader` cargará las siguientes mat
 - Ingles
 
 > Adicionalmente listará todos los alumnos si llegaran a existir
+
+### Usuarios pre cargados
+
+**Un administrador** (READ, CREATE, UPDATE, DELETE) <br>
+Puede acceder a las 
+
+
+Correo: `anabanana@mail.com` <br>
+Clave: `12345678`
+
+**Un usuario regular** (READ, CREATE, UPDATE)
+
+Correo: `mariasandia@mail.com` <br>
+Clave: `12345678`
+
+**Un usuario invitado** (READ)
+
+Correo: `mariasandia@mail.com` <br>
+Clave: `12345678`
 
 🌼 Enlace al frontend 🌼
