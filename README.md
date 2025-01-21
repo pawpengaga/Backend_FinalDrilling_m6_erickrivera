@@ -145,7 +145,7 @@ Clave: `12345678`
 
 **Un usuario invitado** (READ)
 
-Correo: `mariasandia@mail.com` <br>
+Correo: `invitado@mail.com` <br>
 Clave: `12345678`
 
 🌼 [Enlace al frontend](https://github.com/pawpengaga/Frontend_FinalDrilling_m6_erickrivera) 🌼
