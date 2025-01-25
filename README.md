@@ -98,7 +98,7 @@ Ejemplo de solicitud
 
 ### Iniciar sesión `POST`
 
-No requiere token
+No requiere Bearer token
 
 
 ```
